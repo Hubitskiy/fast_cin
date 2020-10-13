@@ -5,8 +5,8 @@ router = APIRouter()
 
 
 @router.get(
-    '/users/',
+    path='/users/',
     tags=["Users"]
 )
 def get_user():
-    return {"message": "Hello, it`s me Real User"}
+    return {"message": "Hello it`s me Mario"}
