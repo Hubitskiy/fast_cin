@@ -9,4 +9,4 @@ router = APIRouter()
     tags=["Users"]
 )
 def get_user():
-    return {"message": "Hello it`s me Mario"}
+    return {"message": "Hello, it`s me Mario"}
