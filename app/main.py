@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 
+from users.urls import router as users_router
+
 
 app = FastAPI()
 
 
-@app.get("/")
-def root():
-    return {"message": "Hello World"}
+app.include_router(users_router)
