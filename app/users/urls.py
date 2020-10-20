@@ -4,9 +4,10 @@ from users.presenters import CreateUserPresenter
 router = APIRouter()
 
 
-@router.get(
+@router.post(
     path='/users/',
-    tags=["Users"]
+    tags=["Users"],
+    status_code=200
 )
 def get_user(create_presenter: CreateUserPresenter = Depends(CreateUserPresenter)):
-    return create_presenter()
+    create_presenter()
