@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from pydantic import BaseModel
 
 
 __all__ = ["BasePresenter", "RetrievePresenter", "CreatePresenter", "UpdatePresenter", "DeletePresenter"]
