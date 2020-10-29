@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 
 from pydantic import PostgresDsn
 
@@ -15,8 +15,12 @@ SQLALCHEMY_DATABASE_URL = PostgresDsn.build(
     path=f'/{os.getenv("POSTGRES_DB")}'
 )
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+class Database:
+    engine = create_engine(SQLALCHEMY_DATABASE_URL)
+    db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    session = SessionLocal()
+
 
 Base = declarative_base()
