@@ -1,3 +1,9 @@
+from core.db.utils import DBConnectionManager
+
+
+__all__ = ["BaseCRUDDBManagement"]
+
+
 class BaseCRUDDBManagement(type):
 
     allowed_methods = ("create", "retrieve", "update", "delete")
@@ -13,3 +19,7 @@ class BaseCRUDDBManagement(type):
             )
 
         return child_class
+
+    def __init__(self, name, attributes, dct):
+        self.db = DBConnectionManager()
+        super().__init__(name, attributes, dct)

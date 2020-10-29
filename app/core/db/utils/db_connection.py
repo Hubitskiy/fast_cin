@@ -1,15 +1,13 @@
-from fastapi import Depends
-
-from core.db.database import SessionLocal
+from core.db.database import Database
 
 
 class DBConnectionManager:
 
-    def __init__(self, db: SessionLocal = Depends(SessionLocal)):
-        self.db = db
+    def __init__(self):
+        self.db = Database
 
     def __enter__(self):
-        return self.db
+        return self.db.session
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.db.close()
+        self.db.session.close()
