@@ -1,8 +1,8 @@
 from fastapi.exceptions import HTTPException
 from attr import attrs
 
-from app.core.usecases import BaseUseCase
-from app.users.user_managment import UserDBManagement
+from core.usecases import BaseUseCase
+from users.user_managment import UserDBManagement
 
 
 @attrs(auto_attribs=True)
