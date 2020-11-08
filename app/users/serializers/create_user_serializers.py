@@ -14,9 +14,9 @@ class CreateUserSerializer(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-            "email": "example@mm.com",
-            "password": "12345678",
-            "first_name": "Foo",
-            "last_name": "Bar"
+                "email": "example@mm.com",
+                "password": "12345678",
+                "first_name": "Foo",
+                "last_name": "Bar"
+                }
             }
-        }

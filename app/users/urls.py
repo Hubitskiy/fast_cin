@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from typing import Dict, List
+from typing import Dict
 
 from users.presenters import CreateUserPresenter
 

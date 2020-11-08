@@ -10,11 +10,12 @@ class CreateUserPresenter(CreatePresenter):
         self.user_data = user_data
 
     def create(self, **kwargs):
-        user = UserDBManagement()
 
         user_dict = self.user_data.dict()
 
         password = user_dict.pop("password")
+
+        user = UserDBManagement()
 
         user.create(**user_dict, hashed_password=password)
 

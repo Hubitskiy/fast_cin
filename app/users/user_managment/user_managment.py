@@ -14,3 +14,10 @@ class UserDBManagement(metaclass=BaseCRUDDBManagement):
             db.refresh(user)
 
         return user
+
+    def retrieve(self, email: str, *args, **kwargs):
+
+        with self.db as db:
+            user = db.query(UserModel).filter(email=email)
+
+        return user
