@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class BaseUseCase(ABC):
+class BaseUseCase:
 
     def validate(self, *args, **kwargs):
         raise NotImplementedError

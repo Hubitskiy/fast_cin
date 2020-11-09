@@ -1,7 +1,14 @@
 from .container import Container
 
+from users.injections import dependencies as user_dependencies
+
+
+_dependencies = set()
+
+_dependencies.update(user_dependencies)
+
 
 container = Container()
-container.add_dependencies_to_container(None)
+container.register_dependencies(_dependencies)
 
 resolve = container.resolve

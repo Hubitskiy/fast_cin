@@ -1,1 +1,1 @@
-from .usecases import BaseUseCase
+from .usecases import (BaseUseCase, BaseService)

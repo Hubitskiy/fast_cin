@@ -1,7 +1,11 @@
-from users.usecases import CreateUserUseCase
+from users import usecases
+from users import services
 
 
 dependencies = {
+    # services
+    services.CreateUserService,
+
     # usecases
-    CreateUserUseCase
+    usecases.CreateUserUseCase
 }

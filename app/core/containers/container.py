@@ -5,8 +5,8 @@ import punq
 
 class Container(punq.Container):
 
-    def add_dependencies_to_container(self, injections: Set) -> None:
-        for injections in injections:
-            self.register(injections)
+    def register_dependencies(self, dependencies: Set) -> None:
+        for dependence in dependencies:
+            self.register(dependence)
 
         return None

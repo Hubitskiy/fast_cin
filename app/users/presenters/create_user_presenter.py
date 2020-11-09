@@ -1,7 +1,8 @@
 from core.presenters import CreatePresenter
+from core.containers import resolve
 
 from users.serializers import CreateUserSerializer
-from users.user_managment import UserDBManagement
+from users.usecases import CreateUserUseCase
 
 
 class CreateUserPresenter(CreatePresenter):
@@ -11,12 +12,8 @@ class CreateUserPresenter(CreatePresenter):
 
     def create(self, **kwargs):
 
-        user_dict = self.user_data.dict()
+        create_user = resolve(CreateUserUseCase)
 
-        password = user_dict.pop("password")
-
-        user = UserDBManagement()
-
-        user.create(**user_dict, hashed_password=password)
+        create_user(user_data=self.user_data.dict())
 
         return {}
