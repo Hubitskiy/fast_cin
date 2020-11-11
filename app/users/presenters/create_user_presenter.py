@@ -1,7 +1,10 @@
+from typing import Dict
+
 from core.presenters import CreatePresenter
+from core.containers import resolve
 
 from users.serializers import CreateUserSerializer
-from users.user_managment import UserDBManagement
+from users.usecases import CreateUserUseCase
 
 
 class CreateUserPresenter(CreatePresenter):
@@ -9,13 +12,10 @@ class CreateUserPresenter(CreatePresenter):
     def __init__(self, user_data: CreateUserSerializer):
         self.user_data = user_data
 
-    def create(self, **kwargs):
-        user = UserDBManagement()
+    def create(self, **kwargs) -> Dict:
 
-        user_dict = self.user_data.dict()
+        create_user = resolve(CreateUserUseCase)
 
-        password = user_dict.pop("password")
-
-        user.create(**user_dict, hashed_password=password)
+        create_user(**self.user_data.dict())
 
         return {}
