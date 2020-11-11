@@ -5,7 +5,7 @@ from users.models import UserModel
 
 class UserDBManagement(metaclass=BaseCRUDDBManagement):
 
-    def create(self, **kwargs):
+    def create_user(self, **kwargs) -> UserModel:
 
         with self.db as db:
             user = UserModel(**kwargs)
@@ -15,9 +15,9 @@ class UserDBManagement(metaclass=BaseCRUDDBManagement):
 
         return user
 
-    def retrieve(self, email: str, *args, **kwargs):
+    def retrieve_by_email(self, email: str) -> UserModel:
 
         with self.db as db:
-            user = db.query(UserModel).filter(email=email)
+            user = db.query(UserModel).filter(UserModel.email == email).all()
 
         return user

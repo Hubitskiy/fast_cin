@@ -9,6 +9,6 @@ _dependencies.update(user_dependencies)
 
 
 container = Container()
-container.register_dependencies(_dependencies)
+container.register_set_dependencies(_dependencies)
 
 resolve = container.resolve

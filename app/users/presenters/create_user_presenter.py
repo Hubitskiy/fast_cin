@@ -1,3 +1,5 @@
+from typing import Dict
+
 from core.presenters import CreatePresenter
 from core.containers import resolve
 
@@ -10,10 +12,10 @@ class CreateUserPresenter(CreatePresenter):
     def __init__(self, user_data: CreateUserSerializer):
         self.user_data = user_data
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Dict:
 
         create_user = resolve(CreateUserUseCase)
 
-        create_user(user_data=self.user_data.dict())
+        create_user(**self.user_data.dict())
 
         return {}
