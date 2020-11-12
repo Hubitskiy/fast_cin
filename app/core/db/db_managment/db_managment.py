@@ -11,15 +11,9 @@ class BaseCRUDDBManagement(type):
     def __new__(mcs, name, bases, dct):
 
         if not any(
-
-                (meth.startswith(mcs.a_m[0]) or meth.startswith(mcs.a_m[1]))
-
-                or
-
-                (meth.startswith(mcs.a_m[2]) or meth.startswith(mcs.a_m[3]))
-
+                meth.startswith(m)
                 for meth in dct
-
+                for m in mcs.a_m
         ):
             raise NotImplementedError(
                 f"You must implement at least one of the following methods: {mcs.a_m}"
