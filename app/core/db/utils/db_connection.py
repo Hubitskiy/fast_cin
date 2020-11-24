@@ -1,10 +1,10 @@
 from core.db.database import Database
+from attr import attrs
 
 
-class DBConnectionManager:
-
-    def __init__(self):
-        self.db = Database
+@attrs(auto_attribs=True)
+class DBConnection:
+    db: Database
 
     def __enter__(self):
         return self.db.session
