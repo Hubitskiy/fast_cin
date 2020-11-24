@@ -10,11 +10,11 @@ from users.services import CreateUserService
 @attrs(auto_attribs=True)
 class CreateUserUseCase(BaseUseCase):
     _create_user: CreateUserService
+    _user_db_management: UserDBManagement
 
     def validate(self, email: str, **kwargs) -> bool:
 
-        user = UserDBManagement()
-        user = user.retrieve_by_email(email=email)
+        user = self._user_db_management.retrieve_by_email(email=email)
 
         if user:
             raise HTTPException(status_code=409, detail=f"User with given email already exist")

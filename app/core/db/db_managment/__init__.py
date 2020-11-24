@@ -1,1 +1,1 @@
-from .db_managment import BaseCRUDDBManagement
+from .db_managment import DB
