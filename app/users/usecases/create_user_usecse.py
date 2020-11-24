@@ -5,6 +5,7 @@ from core.usecases import BaseUseCase
 
 from users.user_managment import UserDBManagement
 from users.services import CreateUserService
+from users.models import UserModel
 
 
 @attrs(auto_attribs=True)
@@ -21,7 +22,7 @@ class CreateUserUseCase(BaseUseCase):
 
         return True
 
-    def execute(self, *args, **kwargs) -> UserDBManagement:
+    def execute(self, *args, **kwargs) -> UserModel:
 
         create_user = self._create_user(**kwargs)
 
