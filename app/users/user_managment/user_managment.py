@@ -18,6 +18,6 @@ class UserDBManagement(DB):
     def retrieve_by_email(self, email: str) -> UserModel:
 
         with self.db_connect as db:
-            user = db.query(UserModel).filter(UserModel.email == email).all()
+            user = db.query(UserModel).filter(UserModel.email == email).first()
 
         return user

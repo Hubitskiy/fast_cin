@@ -29,7 +29,7 @@ services:
       - .env
     container_name: cin_server
     working_dir: /app
-    command: ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "80"]
+    command: ["uvicorn", "main:app", "--reload", "--log-level", "warning","--host", "0.0.0.0", "--port", "80"]
     depends_on:
 #      - src
       - db

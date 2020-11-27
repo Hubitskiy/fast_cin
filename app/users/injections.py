@@ -5,8 +5,10 @@ from users import user_managment
 dependencies = {
     user_managment.UserDBManagement,
     # services
+    services.CreateAccessTokenService,
     services.CreateUserService,
 
     # usecases
+    usecases.AuthenticateUserUseCase,
     usecases.CreateUserUseCase
 }

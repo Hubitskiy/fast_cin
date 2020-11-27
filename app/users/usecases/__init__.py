@@ -1,1 +1,2 @@
-from .create_user_usecse import CreateUserUseCase
+from .create_user_usecase import CreateUserUseCase
+from .authenticate_user_usecase import AuthenticateUserUseCase
