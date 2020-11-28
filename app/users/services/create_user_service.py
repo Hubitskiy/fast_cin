@@ -1,7 +1,7 @@
 from attr import attrs
 
 from core.usecases import BaseService
-from core.utils import password_hasher
+from core.utils import crypt
 
 from users.user_managment import UserDBManagement
 from users.models import UserModel
@@ -15,7 +15,7 @@ class CreateUserService(BaseService):
 
         password = kwargs.pop("password")
 
-        hashed_password = password_hasher.hash_password(password=password)
+        hashed_password = crypt.get_password_hash(password=password)
 
         kwargs.setdefault("hashed_password", hashed_password)
 
