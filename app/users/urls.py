@@ -1,7 +1,6 @@
 from typing import Dict
 
 from fastapi import APIRouter, Depends, status
-from fastapi.security import OAuth2PasswordBearer
 
 from users.presenters import (CreateUserPresenter, AuthenticateUserPresenter)
 from users.serializers import TokenSerializer
@@ -22,9 +21,10 @@ def create_user(create_user_presenter: CreateUserPresenter = Depends(CreateUserP
 
 
 @router.post(
-    path='/jwt/create/',
+    path='/users/token/',
     tags=[TAG],
     status_code=status.HTTP_200_OK,
+    response_model=TokenSerializer
 )
 def create_access_token(authenticate_user_presenter: AuthenticateUserPresenter = Depends()):
     return authenticate_user_presenter()
