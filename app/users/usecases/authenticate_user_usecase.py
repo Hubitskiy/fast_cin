@@ -28,5 +28,5 @@ class AuthenticateUserUseCase(BaseUseCase):
                 detail="Complete registration", status_code=status.HTTP_403_FORBIDDEN
             )
 
-    def execute(self, username: str) -> str:
+    def execute(self, username: str, **kwargs) -> str:
         return self._create_access_token(username)
