@@ -1,5 +1,9 @@
+from typing import Dict
 from passlib.context import CryptContext
-from jose import jwt
+from jose import jwt, JWTError
+
+from fastapi.exceptions import HTTPException
+from fastapi import status
 
 from core.settings import settings
 
@@ -24,3 +28,19 @@ def encode_jwt(username: str) -> str:
     enc_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
     return enc_jwt
+
+
+def decode_jwt(token: str) -> Dict:
+
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+    try:
+        decoded_data: Dict = jwt.decode(token, settings.SECRET_KEY, settings.ALGORITHM)
+    except JWTError:
+        raise credentials_exception
+
+    return decoded_data

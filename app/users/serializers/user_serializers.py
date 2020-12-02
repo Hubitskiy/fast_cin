@@ -20,3 +20,14 @@ class CreateUserSerializer(BaseModel):
                 "last_name": "Bar"
                 }
             }
+
+
+class RetrieveUserSerializer(BaseModel):
+
+    id: int
+
+    email: str
+
+    first_name: str
+
+    last_name: str
