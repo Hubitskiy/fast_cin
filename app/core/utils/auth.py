@@ -1,20 +1,20 @@
 from typing import Optional, Any, Dict
+from datetime import datetime
 
 from fastapi.security import OAuth2PasswordBearer
-from fastapi import Depends
+from fastapi import Depends, status
 from fastapi.exceptions import HTTPException
-from fastapi import status
 
 from core.utils import crypt
 from core.db.database import Database
 from core.db.utils import DBConnection
-
+from core.settings import settings
 
 from users.models import UserModel
 from users.user_managment import UserDBManagement
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/token/")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=settings.TOKEN_URL)
 
 
 def authenticate_user(
@@ -46,6 +46,14 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> UserModel:
     if not user.is_active:
         raise HTTPException(
             detail="User isn`t active",
+            status_code=status.HTTP_401_UNAUTHORIZED
+        )
+
+    expires_date:  datetime.timestamp = encoded_data.get("exp")
+
+    if datetime.fromtimestamp(expires_date) <= datetime.utcnow():
+        raise HTTPException(
+            detail="Token has expires",
             status_code=status.HTTP_401_UNAUTHORIZED
         )
 

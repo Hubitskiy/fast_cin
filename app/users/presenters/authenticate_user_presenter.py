@@ -22,7 +22,8 @@ class AuthenticateUserPresenter(CreatePresenter, OAuth2PasswordRequestForm):
 
 @attrs(auto_attribs=True)
 class AuthorizationUserPresenter(RetrievePresenter):
+
     current_user: UserModel = Depends(get_current_user)
 
     def retrieve(self, **kwargs):
-        return self.current_user
+        return self.current_user.__dict__
