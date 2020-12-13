@@ -18,7 +18,7 @@ class EmailSender(smtplib.SMTP_SSL):
 
 
 @app.task
-def send_email(to_email: str):
+def send_email(to_email: str, content):
 
     context = ssl.create_default_context()
 
@@ -26,5 +26,5 @@ def send_email(to_email: str):
         sender.sendmail(
             from_addr=SENDER_EMAIL,
             to_addrs=to_email,
-            msg="Test Content"
+            msg=content
         )
