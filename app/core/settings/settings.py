@@ -12,6 +12,6 @@ TOKEN_URL = "/users/token/"
 
 # EMAIL SETTINGS
 SMTP_SERVER = "smtp.gmail.com"
-PORT = 587
+PORT = 465
 SENDER_EMAIL = "timwer23@gmail.com"
 SENDER_PASSWORD = "12111195Gh12"
