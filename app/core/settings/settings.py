@@ -1,6 +1,9 @@
 from datetime import datetime, timedelta
 
 
+# SERVER SETTINGS
+SITE_NAME = "CIN"
+
 # AUTHORIZATION SETTINGS
 # SECRET_KEY create run command
 # openssl rand -hex 32
@@ -13,5 +16,8 @@ TOKEN_URL = "/users/token/"
 # EMAIL SETTINGS
 SMTP_SERVER = "smtp.gmail.com"
 PORT = 465
-SENDER_EMAIL = "timwer23@gmail.com"
-SENDER_PASSWORD = "12111195Gh12"
+SENDER_EMAIL = "contactcus2@gmail.com"
+SENDER_PASSWORD = "cota-1111"
+
+# TEMPLATES SETTINGS
+TEMPLATE_PACKAGE = "emails"
