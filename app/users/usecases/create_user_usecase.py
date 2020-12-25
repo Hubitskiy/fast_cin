@@ -4,13 +4,14 @@ from attr import attrs
 from core.usecases import BaseUseCase
 
 from users.user_managment import UserDBManagement
-from users.services import CreateUserService
+from users.services import CreateUserService, SendUserRegistrationInvitationService
 from users.models import UserModel
 
 
 @attrs(auto_attribs=True)
 class CreateUserUseCase(BaseUseCase):
     _create_user: CreateUserService
+    _send_email_invitation: SendUserRegistrationInvitationService
     _user_db_management: UserDBManagement
 
     def validate(self, email: str, **kwargs) -> bool:
@@ -24,6 +25,8 @@ class CreateUserUseCase(BaseUseCase):
 
     def execute(self, *args, **kwargs) -> UserModel:
 
-        create_user = self._create_user(**kwargs)
+        created_user = self._create_user(**kwargs)
 
-        return create_user
+        self._send_email_invitation(user=created_user)
+
+        return created_user

@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 # SERVER SETTINGS
 SITE_NAME = "CIN"
+SITE_URL = "0.0.0.0"
 
 # AUTHORIZATION SETTINGS
 # SECRET_KEY create run command

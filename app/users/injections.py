@@ -5,6 +5,7 @@ from users import user_managment
 dependencies = {
     user_managment.UserDBManagement,
     # services
+    services.SendUserRegistrationInvitationService,
     services.CreateAccessTokenService,
     services.CreateUserService,
 

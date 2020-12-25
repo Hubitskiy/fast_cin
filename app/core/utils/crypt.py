@@ -1,5 +1,8 @@
-from typing import Dict
+from typing import Dict, Optional
 from passlib.context import CryptContext
+
+import base64
+
 from jose import jwt, JWTError
 
 from fastapi.exceptions import HTTPException
@@ -44,3 +47,27 @@ def decode_jwt(token: str) -> Dict:
         raise credentials_exception
 
     return decoded_data
+
+
+def base64_encode(enc_data: Optional[str or int]) -> str:
+
+    encode_data = None
+
+    if type(enc_data) is int:
+        encode_data = str(enc_data).encode()
+
+    elif type(enc_data) is str:
+        encode_data = enc_data.encode()
+
+    encoded_data = base64.b64encode(encode_data)
+
+    return encoded_data.decode()
+
+
+def base64_decode(dec_data: str) -> str:
+
+    decode_data = dec_data.encode('ascii')
+
+    decoded_data = base64.b64decode(decode_data)
+
+    return decoded_data.decode('ascii')
