@@ -54,7 +54,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> UserModel:
     if datetime.fromtimestamp(expires_date) <= datetime.utcnow():
         raise HTTPException(
             detail="Token has expires",
-            status_code=status.HTTP_401_UNAUTHORIZED
+            status_code=status.HTTP_403_FORBIDDEN
         )
 
     return user

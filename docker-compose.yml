@@ -8,6 +8,22 @@ services:
 #    volumes:
 #      - sources:/app
 
+  celery_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fast_cin_celery_worker
+    depends_on:
+      - redis
+      - db
+    volumes:
+      - ./app:/app
+    env_file:
+      - .env
+    command: celery -A celery_tasks worker -B
+    networks:
+      - internal
+
   db:
     image: postgres:12-alpine
     container_name: cin_db
@@ -45,6 +61,14 @@ services:
     container_name: cin_admin
     ports:
       - "8080:8080"
+    networks:
+      - internal
+
+  redis:
+    image: redis:alpine
+    container_name: fast_cin_redis
+    volumes:
+      - ./redis_data:/redis_data
     networks:
       - internal
 
