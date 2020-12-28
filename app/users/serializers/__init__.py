@@ -1,3 +1,3 @@
 from .user_serializers import CreateUserSerializer
-from .token_serializer import TokenSerializer
+from .token_serializer import TokenSerializer, UidTokenSerializer
 from .user_serializers import RetrieveUserSerializer

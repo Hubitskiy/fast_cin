@@ -31,7 +31,7 @@ class CreatePresenter(BasePresenter):
 class UpdatePresenter(BasePresenter):
 
     @abstractmethod
-    def update(self, partial: bool = False, **kwargs):
+    def update(self, *args, **kwargs):
         pass
 
     def __call__(self, *args, **kwargs):
