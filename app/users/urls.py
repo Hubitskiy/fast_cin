@@ -4,7 +4,12 @@ from fastapi import APIRouter, Depends, status
 
 from core.settings import settings
 
-from users.presenters import (CreateUserPresenter, AuthenticateUserPresenter, AuthorizationUserPresenter)
+from users.presenters import (
+    CreateUserPresenter,
+    AuthenticateUserPresenter,
+    AuthorizationUserPresenter,
+    ActivateUserPresenter
+)
 from users.serializers import TokenSerializer, RetrieveUserSerializer
 
 
@@ -41,3 +46,13 @@ def create_access_token(authenticate_user_presenter: AuthenticateUserPresenter =
 )
 def retrieve_current_user(current_user: AuthorizationUserPresenter = Depends(AuthorizationUserPresenter)):
     return current_user()
+
+
+@router.patch(
+    path='/users/confirms-invitations/',
+    tags=[TAG],
+    status_code=status.HTTP_200_OK,
+    response_model=RetrieveUserSerializer
+)
+def activate_user(activate_user_presenter: ActivateUserPresenter = Depends(ActivateUserPresenter)):
+    return activate_user_presenter()

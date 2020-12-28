@@ -31,3 +31,5 @@ class RetrieveUserSerializer(BaseModel):
     first_name: str
 
     last_name: str
+
+    is_active: bool

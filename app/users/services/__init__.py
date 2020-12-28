@@ -1,3 +1,4 @@
 from .create_user_service import CreateUserService
 from .create_access_token_service import CreateAccessTokenService
 from .send_user_invitation_service import SendUserRegistrationInvitationService
+from .activate_user_service import ActivateUserService
