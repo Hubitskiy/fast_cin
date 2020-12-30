@@ -23,7 +23,7 @@ def authenticate_user(
         password: str
 ) -> Optional[UserModel or bool]:
 
-    user = db_management.retrieve_by_email(email=username)
+    user = db_management.retrieve_user_by(email=username)
 
     if user is None:
         return False
@@ -41,7 +41,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> UserModel:
     username: str = encoded_data.get("sub")
 
     user_db = UserDBManagement(DBConnection(Database()))
-    user = user_db.retrieve_by_email(email=username)
+    user = user_db.retrieve_user_by(email=username)
 
     if not user.is_active:
         raise HTTPException(
@@ -53,7 +53,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> UserModel:
 
     if datetime.fromtimestamp(expires_date) <= datetime.utcnow():
         raise HTTPException(
-            detail="Token has expires",
+            detail="Token has expire",
             status_code=status.HTTP_403_FORBIDDEN
         )
 

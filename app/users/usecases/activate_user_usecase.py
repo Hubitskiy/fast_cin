@@ -22,7 +22,7 @@ class ActivateUserUseCase(BaseUseCase):
 
         email = crypt.base64_decode(token)
 
-        user = self._user_management.retrieve_user_by_id(id=user_id)
+        user = self._user_management.retrieve_user_by(id=user_id)
 
         if user is None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid UID or Token")

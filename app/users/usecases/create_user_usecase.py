@@ -16,7 +16,7 @@ class CreateUserUseCase(BaseUseCase):
 
     def validate(self, email: str, **kwargs) -> bool:
 
-        user = self._user_db_management.retrieve_by_email(email=email)
+        user = self._user_db_management.retrieve_user_by(email=email)
 
         if user:
             raise HTTPException(status_code=409, detail=f"User with given email already exist")
