@@ -31,8 +31,8 @@ class UserDBManagement(DB):
 
             for attr, value in attrs_and_fields.items():
                 setattr(user, attr, value)
-                db.commit()
 
+            db.commit()
             db.refresh(user)
 
         return user
