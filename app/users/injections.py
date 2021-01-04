@@ -7,7 +7,7 @@ dependencies = {
     # services
     services.ActivateUserService,
     services.SendUserRegistrationInvitationService,
-    services.CreateAccessTokenService,
+    services.CreateTokensService,
     services.CreateUserService,
 
     # usecases

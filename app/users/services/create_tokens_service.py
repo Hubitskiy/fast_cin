@@ -3,13 +3,16 @@ from core.utils import crypt
 from core.settings import settings
 
 
-class CreateAccessTokenService(BaseService):
+class CreateTokensService(BaseService):
 
     def create_access_token(self, username: str):
-        token = crypt.encode_jwt(username)
+
+        access_token = crypt.encode_jwt(username)
+        refresh_token = crypt.encode_jwt(is_access_token=False)
 
         return {
-            "access_token": str(token),
+            "refresh_token": str(refresh_token),
+            "access_token": str(access_token),
             "token_type": settings.TOKEN_TYPE
         }
 
