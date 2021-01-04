@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict
 
 from core.db.db_managment import DB
 
@@ -24,12 +24,15 @@ class UserDBManagement(DB):
 
         return user
 
-    def set_attr(self, user_id: int, attr: str, value: Any) -> UserModel:
+    def update_user(self, user_id: int, attrs_and_fields: Dict) -> UserModel:
 
         with self.db_connect as db:
             user: UserModel = db.query(UserModel).filter_by(id=user_id).first()
-            setattr(user, attr, value)
-            db.commit()
+
+            for attr, value in attrs_and_fields.items():
+                setattr(user, attr, value)
+                db.commit()
+
             db.refresh(user)
 
         return user
