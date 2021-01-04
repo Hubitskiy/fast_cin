@@ -38,6 +38,16 @@ def create_access_token(authenticate_user_presenter: AuthenticateUserPresenter =
     return authenticate_user_presenter()
 
 
+@router.post(
+    path='/users/token-refresh/',
+    tags=[TAG],
+    status_code=status.HTTP_200_OK,
+    response_model=RetrieveUserSerializer
+)
+def refresh_token():
+    pass
+
+
 @router.get(
     path='/users/me/',
     tags=[TAG],
