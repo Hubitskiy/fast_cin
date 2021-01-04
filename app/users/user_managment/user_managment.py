@@ -24,7 +24,7 @@ class UserDBManagement(DB):
 
         return user
 
-    def set_attr(self, user_id: int, attr: str, value: Any) -> UserModel:
+    def update_user(self, user_id: int, attr: str, value: Any) -> UserModel:
 
         with self.db_connect as db:
             user: UserModel = db.query(UserModel).filter_by(id=user_id).first()

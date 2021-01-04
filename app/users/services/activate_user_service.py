@@ -12,7 +12,7 @@ class ActivateUserService(BaseService):
 
     def activate_user(self, user: UserModel) -> UserModel:
 
-        active_user = self._user_management.set_attr(user_id=user.id, attr="is_active", value=True)
+        active_user = self._user_management.update_user(user_id=user.id, attr="is_active", value=True)
 
         return active_user
 
