@@ -8,7 +8,8 @@ from users.presenters import (
     CreateUserPresenter,
     AuthenticateUserPresenter,
     AuthorizationUserPresenter,
-    ActivateUserPresenter
+    ActivateUserPresenter,
+    RefreshTokenPresenter
 )
 from users.serializers import TokenSerializer, RetrieveUserSerializer
 
@@ -42,10 +43,11 @@ def create_access_token(authenticate_user_presenter: AuthenticateUserPresenter =
     path='/users/token-refresh/',
     tags=[TAG],
     status_code=status.HTTP_200_OK,
-    response_model=RetrieveUserSerializer
+    response_model=TokenSerializer,
+    description='Send In Headers "Authorization" param with Bearer Token for get refresh and access token'
 )
-def refresh_token():
-    pass
+def refresh_token(refresh_token_presenter: RefreshTokenPresenter = Depends(RefreshTokenPresenter)):
+    return refresh_token_presenter()
 
 
 @router.get(

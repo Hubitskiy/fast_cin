@@ -10,3 +10,7 @@ class TokenSerializer(BaseModel):
 class UidTokenSerializer(BaseModel):
     uid: str
     token: str
+
+
+class RefreshTokenSerializer(BaseModel):
+    refresh_token: str

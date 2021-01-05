@@ -11,6 +11,7 @@ dependencies = {
     services.CreateUserService,
 
     # usecases
+    usecases.RefreshTokenUseCase,
     usecases.ActivateUserUseCase,
     usecases.AuthenticateUserUseCase,
     usecases.CreateUserUseCase
