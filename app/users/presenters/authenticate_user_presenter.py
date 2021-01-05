@@ -9,12 +9,12 @@ from core.presenters import (
     UpdatePresenter
 )
 from core.containers import resolve
-from core.utils.auth import get_current_user
+from core.utils.auth import get_current_user, oauth2_scheme
 
-from users.usecases import AuthenticateUserUseCase, ActivateUserUseCase
+from users.usecases import AuthenticateUserUseCase, ActivateUserUseCase, RefreshTokenUseCase
 from users.models import UserModel
 
-from users.serializers import UidTokenSerializer
+from users.serializers import UidTokenSerializer, RefreshTokenSerializer
 
 
 class AuthenticateUserPresenter(CreatePresenter, OAuth2PasswordRequestForm):
@@ -24,6 +24,19 @@ class AuthenticateUserPresenter(CreatePresenter, OAuth2PasswordRequestForm):
         access_token = resolve(AuthenticateUserUseCase)
 
         return access_token(username=self.username, password=self.password)
+
+
+@attrs(auto_attribs=True)
+class RefreshTokenPresenter(CreatePresenter):
+
+    refresh_token: RefreshTokenSerializer
+    access_token: str = Depends(oauth2_scheme)
+
+    def create(self, **kwargs):
+
+        refresh_tokens = resolve(RefreshTokenUseCase)
+
+        return refresh_tokens(access_token=self.access_token, **self.refresh_token.dict())
 
 
 @attrs(auto_attribs=True)

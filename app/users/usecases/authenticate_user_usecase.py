@@ -6,13 +6,13 @@ from core.usecases import BaseUseCase
 from core.utils.auth import authenticate_user
 
 from users.user_managment import UserDBManagement
-from users.services import CreateAccessTokenService
+from users.services import CreateTokensService
 
 
 @attrs(auto_attribs=True)
 class AuthenticateUserUseCase(BaseUseCase):
     _user_db_management: UserDBManagement
-    _create_access_token: CreateAccessTokenService
+    _create_tokens: CreateTokensService
 
     def validate(self, username: str, password: str):
 
@@ -29,4 +29,4 @@ class AuthenticateUserUseCase(BaseUseCase):
             )
 
     def execute(self, username: str, **kwargs) -> str:
-        return self._create_access_token(username)
+        return self._create_tokens(username)

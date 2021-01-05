@@ -22,11 +22,20 @@ def verify_password(inc_password: str, hashed_password: str):
     return pwd_context.verify(inc_password, hashed_password)
 
 
-def encode_jwt(username: str) -> str:
+def encode_jwt(username: str = None,  is_access_token: bool = True) -> str:
+
+    if username is None and is_access_token is None:
+        raise KeyError("Username or Token Expire Time must be added")
 
     to_encode = {}
-    to_encode.update({"sub": username})
-    to_encode.update({"exp": settings.ACCESS_TOKEN_EXPIRE_MINUTES})
+
+    if username is not None:
+        to_encode.update({"sub": username})
+
+    if is_access_token:
+        to_encode.update({"exp": settings.ACCESS_TOKEN_EXPIRE_TIME})
+    else:
+        to_encode.update({"exp": settings.REFRESH_EXPIRE_TIME})
 
     enc_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
