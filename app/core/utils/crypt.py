@@ -51,7 +51,12 @@ def decode_jwt(token: str) -> Dict:
     )
 
     try:
-        decoded_data: Dict = jwt.decode(token, settings.SECRET_KEY, settings.ALGORITHM)
+        decoded_data: Dict = jwt.decode(
+            token,
+            settings.SECRET_KEY,
+            settings.ALGORITHM,
+            options={'verify_exp': False}
+        )
     except JWTError:
         raise credentials_exception
 
