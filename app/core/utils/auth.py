@@ -46,7 +46,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> UserModel:
     if not user.is_active:
         raise HTTPException(
             detail="User isn`t active",
-            status_code=status.HTTP_401_UNAUTHORIZED
+            status_code=status.HTTP_403_FORBIDDEN
         )
 
     expires_date:  datetime.timestamp = encoded_data.get("exp")
@@ -55,7 +55,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> UserModel:
         raise HTTPException(
             detail="Token has expire",
             headers={"WWW-Authenticate": "Bearer"},
-            status_code=status.HTTP_403_FORBIDDEN
+            status_code=status.HTTP_410_GONE
         )
 
     return user
