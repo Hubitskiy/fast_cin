@@ -1,5 +1,6 @@
 from attr import attrs
 from datetime import datetime
+from typing import Dict
 
 from fastapi.exceptions import HTTPException
 from fastapi import status
@@ -16,7 +17,7 @@ class RefreshTokenUseCase(BaseUseCase):
     _users_management: UserDBManagement
     _create_tokens: CreateTokensService
 
-    def validate(self, access_token, refresh_token, *args, **kwargs):
+    def validate(self, access_token: str, refresh_token: str, *args, **kwargs) -> str:
 
         decoded_refresh_token = crypt.decode_jwt(token=refresh_token)
 
@@ -37,7 +38,7 @@ class RefreshTokenUseCase(BaseUseCase):
 
         return username
 
-    def execute(self, username, *args, **kwargs):
+    def execute(self, username, *args, **kwargs) -> Dict:
         return self._create_tokens(username=username)
 
     def __call__(self, access_token, refresh_token):
