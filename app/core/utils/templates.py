@@ -18,7 +18,7 @@ class BaseTemplateRender:
 
     template: str = None
 
-    def get_template(self):
+    def get_template(self) -> Template:
 
         if self.template is None:
             raise NotImplementedError(

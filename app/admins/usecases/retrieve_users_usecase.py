@@ -3,12 +3,12 @@ from attr import attrs
 
 from core.usecases import BaseUseCase
 
-from admins.services import UniqueUserRetrieve, ListRetrieveUserService
+from admins.services import UniqueUserRetrieveService, ListRetrieveUserService
 
 
 @attrs(auto_attribs=True)
 class RetrieveUsersUseCase(BaseUseCase):
-    _unique_user_retrieve: UniqueUserRetrieve
+    _unique_user_retrieve: UniqueUserRetrieveService
     _list_user_retrieve: ListRetrieveUserService
 
     def validate(self, *args, **kwargs):
@@ -24,6 +24,6 @@ class RetrieveUsersUseCase(BaseUseCase):
     ) -> Dict:
 
         if pk is not None:
-            return self._unique_user_retrieve
+            return self._unique_user_retrieve(pk=pk)
 
-        return self._list_user_retrieve
+        return self._list_user_retrieve(limit=limit, offset=offset, **kwargs)

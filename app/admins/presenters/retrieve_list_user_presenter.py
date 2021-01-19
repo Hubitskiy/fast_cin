@@ -1,5 +1,7 @@
 from attr import attrs
 
+from typing import Optional
+
 from fastapi import Query
 from fastapi import Depends
 
@@ -26,4 +28,4 @@ class RetrieveListUserPresenter(RetrievePresenter):
 
         retrieve_users = resolve(RetrieveUsersUseCase)
 
-        return retrieve_users(limit=self.limit, offset=self.offset)
+        return retrieve_users(limit=self.limit, offset=self.offset, is_active=self.is_active)
