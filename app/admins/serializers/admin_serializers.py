@@ -3,7 +3,7 @@ from typing import List
 from pydantic import BaseModel
 
 
-class RetrieveUserSerializer(BaseModel):
+class RetrieveUserForAdminSerializer(BaseModel):
     id: int
     email: str
     first_name: str
@@ -13,5 +13,6 @@ class RetrieveUserSerializer(BaseModel):
 
 
 class RetrieveListUsersSerializer(BaseModel):
-
-    result: List[RetrieveUserSerializer]
+    offset: int
+    limit: int
+    result: List[RetrieveUserForAdminSerializer]

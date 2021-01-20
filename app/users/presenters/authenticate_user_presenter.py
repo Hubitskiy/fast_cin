@@ -10,6 +10,7 @@ from core.presenters import (
 )
 from core.containers import resolve
 from core.utils.auth import get_current_user, oauth2_scheme
+from core.utils.response_handlers import prepare_object_to_response
 
 from users.usecases import AuthenticateUserUseCase, ActivateUserUseCase, RefreshTokenUseCase
 from users.models import UserModel
@@ -59,4 +60,4 @@ class ActivateUserPresenter(UpdatePresenter):
 
         user = activate_user(**self.activation_data.dict())
 
-        return user.__dict__
+        return prepare_object_to_response(user)

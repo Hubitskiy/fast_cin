@@ -14,3 +14,11 @@ class AdminDBManagement(DB):
             list_users = db.query(UserModel).filter_by(**filters).limit(limit).offset(offset)
 
             return list_users
+
+    def retrieve_user_by_pk(self, pk: int) -> UserModel:
+
+        with self.db_connect as db:
+
+            user = db.query(UserModel).get(pk)
+
+            return user
