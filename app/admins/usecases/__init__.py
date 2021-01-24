@@ -1,1 +1,2 @@
 from .retrieve_users_usecase import RetrieveUsersUseCase
+from .update_user_usecase import UpdateUserUseCase

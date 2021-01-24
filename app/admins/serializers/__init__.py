@@ -1,1 +1,5 @@
-from .admin_serializers import RetrieveListUsersSerializer, RetrieveUserForAdminSerializer
+from .admin_serializers import (
+    RetrieveListUsersSerializer,
+    RetrieveUserForAdminSerializer,
+    UpdateUserByAdminSerializer
+)

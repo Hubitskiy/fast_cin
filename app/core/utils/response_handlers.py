@@ -1,7 +1,7 @@
 from typing import List, Dict
 
 
-def prepare_list_response(query_list: List, limit: int, offset: int) -> Dict:
+def prepare_list_response(query_list: List, limit: int, offset: int, **kwargs) -> Dict:
 
     list_obj = [obj.__dict__ for obj in query_list]
 
@@ -12,5 +12,5 @@ def prepare_list_response(query_list: List, limit: int, offset: int) -> Dict:
     }
 
 
-def prepare_object_to_response(obj):
+def prepare_object_to_response(obj) -> Dict:
     return obj.__dict__

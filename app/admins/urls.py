@@ -1,7 +1,11 @@
 from fastapi import APIRouter
 from fastapi import Depends
 
-from admins.presenters import RetrieveListUserPresenter, RetrieveUniqueUserPresenter
+from admins.presenters import (
+    RetrieveListUserPresenter,
+    RetrieveUniqueUserPresenter,
+    UpdateUserPresenter
+)
 from admins.serializers import RetrieveListUsersSerializer, RetrieveUserForAdminSerializer
 
 
@@ -27,3 +31,12 @@ def retrieve_list_users(retrieve_list_user_presenter: RetrieveListUserPresenter 
 )
 def retrieve_unique_user(retrieve_unique_user: RetrieveUniqueUserPresenter = Depends(RetrieveUniqueUserPresenter)):
     return retrieve_unique_user()
+
+
+@router.patch(
+    path="/admins/users/{pk}/",
+    tags=[TAG],
+    response_model=RetrieveUserForAdminSerializer
+)
+def update_user(updated_user: UpdateUserPresenter = Depends(UpdateUserPresenter)):
+    return updated_user()

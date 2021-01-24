@@ -15,7 +15,7 @@ from admins.admins_managment import AdminDBManagement
 class UniqueUserRetrieveService(BaseService):
     _admin_management: AdminDBManagement
 
-    def __call__(self, pk, *args, **kwargs) -> Dict:
+    def __call__(self, pk: int, *args, **kwargs) -> Dict:
 
         user = self._admin_management.retrieve_user_by_pk(pk)
 
@@ -29,8 +29,18 @@ class UniqueUserRetrieveService(BaseService):
 class ListRetrieveUserService(BaseService):
     _admin_management: AdminDBManagement
 
+    @staticmethod
+    def prepare_query(**kwargs) -> Dict:
+
+        if kwargs.get("is_active") is None:
+            kwargs.pop("is_active")
+
+        return kwargs
+
     def __call__(self, *args, **kwargs) -> Dict[str, List[Dict]]:
 
-        users = self._admin_management.retrieve_list_users(**kwargs)
+        query = self.prepare_query(**kwargs)
+
+        users = self._admin_management.retrieve_list_users(**query)
 
         return prepare_list_response(users, **kwargs)
