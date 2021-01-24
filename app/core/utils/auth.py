@@ -59,3 +59,13 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> UserModel:
         )
 
     return user
+
+
+def check_is_admin_user(user: UserModel = Depends(get_current_user)):
+
+    if user.is_admin is not True:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="You have no permission for this"
+        )
+
+    return user

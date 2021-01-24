@@ -3,6 +3,7 @@ from users import services
 from users import user_managment
 
 dependencies = {
+    # db management
     user_managment.UserDBManagement,
     # services
     services.ActivateUserService,
